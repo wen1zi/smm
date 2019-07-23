@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.dao.EmpDao">
+    <select id="findAllEmp" resultType="java.util.Map">
+        select  aaa.*,IFNULL(emp.ename,'牛逼') as mgrname
+        from (select empno,ename,mgr,job,(sal+IFNULL(comm,0)) as total ,hiredate,dname
+        from emp inner JOIN dept on emp.deptno=dept.deptno) aaa LEFT JOIN emp on aaa.mgr=emp.empno
+    </select>
+</mapper>
